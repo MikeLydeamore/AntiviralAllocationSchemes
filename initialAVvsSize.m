@@ -37,7 +37,7 @@ for i=1:length(incVect)
 		var.phi_k=calcProportions(var);
         
 		%var.initialAV=incVect(i);
-		%fprintf('Initial Conditions: ');
+		fprintf('Initial Conditions: ');
 		[ic, prealloc.growth(i,j)]=init_conds_mh(var);
 		fprintf('Calculating DE''s: ');
 		[tout, yout]=selfConstMH(var,ic,[0 100]);
@@ -46,7 +46,6 @@ for i=1:length(incVect)
 		fprintf('Done! \nDoing statistics... ');
 		
 		%Statistics:
-		%recNum=var.k-(stateList(1,:)+stateList(2,:)+stateList(3,:));
 		prealloc.finalsize(i,j)=recNum*(var.N.*yout(end,:))';
 		
 		infAtT=var.N*stateList(3,:)*(yout');
@@ -75,7 +74,6 @@ for i=1:length(incVect)
 		
 		%Statistics:
 		fprintf('Done! \nDoing statistics...');
-		%recNum=var.k-(stateList(1,:)+stateList(2,:)+stateList(3,:));
 		dynalloc.finalsize(i,j)=recNum*(var.N.*yout(end,:))';
 		
 		infAtT=var.N*stateList(3,:)*(yout');
@@ -89,37 +87,9 @@ for i=1:length(incVect)
 		dynallocavs{i,j}=(stateList(4,:)~=0)*yout'*var.N*3;
 		dynt{i,j}=tout;
 		fprintf('Done!\n\n');
-		%clc;
-		%fprintf('Antivirals: %d         Delay: %.4f\n',avVect(i),delayVect(j));
-		%fprintf('Preallocation: %.4f   Dynallocation: %.4f\n',prealloc.growth(i,j), dynalloc.growth(i,j));
+
 		
 		
 		
 	end
 end
-
-%Plotting:
-
-%Fixed delay
-figure(6);
-PreField = fieldnames(prealloc);
-DynField = fieldnames(dynalloc);
-
-for i=1:6
-	subplot(2,3,i);
-	plot(avVect,prealloc.(PreField{i})(:,1));
-	hold on;
-	plot(avVect,dynalloc.(DynField{i})(:,1),'r');
-	title(PreField{i});
-end
-
-%Fixed AV
-%figure(7);
-
-%for i=1:6
-%    subplot(2,3,i);
-%    plot(delayVect,prealloc.(PreField{i})(10,:));
-%    hold on;
-%    plot(delayVect,dynalloc.(DynField{i})(10,:),'r');
-%    title(PreField{i});
-%end

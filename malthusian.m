@@ -13,7 +13,7 @@ elseif strcmp(var.onDist,'exp') && strcmp(var.offDist,'const')
     r=fzero(f,[0.01 5]);
     
 else
-	error('Unknown type of delay or active time distribution, or I''ve ruined the code. Probably the latter');
+	error('Unknown type of delay or active time distribution.);
 end
 
 end

@@ -92,8 +92,7 @@ while amountToShift>smallestHouse
         end
     end
             
-   % moveTo=find(houseSizes(moveTo)&moveTo);
-   % fprintf('Moving from %d %d %d %d to %d %d %d %d\n',s,e,i,houseSize,stateList(1,moveTo),stateList(2,moveTo),stateList(3,moveTo),houseSizes(moveTo));
+
    if stateList(4,index)~=0
        error('Oh dear...');
    end

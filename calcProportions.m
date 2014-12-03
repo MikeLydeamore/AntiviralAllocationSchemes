@@ -4,7 +4,7 @@ function [prop, noAV]=calcProportions(var)
 householdSizes=round(var.h_k(1:end-1).*var.N);
 householdSizes(end+1)=var.N-sum(householdSizes);
 householdSizesOrig=householdSizes;
-%householdSizes=cumsum(householdSizes);
+
 %Initialise proportions
 prop=zeros(1,length(var.h_k));
 
@@ -18,9 +18,8 @@ while abs(noAV-var.maxAV)>smallestHouseSize && counter<var.N
     weighting=cumsum(householdSizes./sum(householdSizes));
     u=rand;
     index=find(u<weighting,1);
-	%index=randi(length(householdSizes),1,1); %Index represents the household size
+
     while noAV+var.dosage*index > var.maxAV || householdSizes(index)-1<0
-        %index=randi(length(householdSizes),1,1);
         u=rand;
         index=find(u<weighting,1);
     end

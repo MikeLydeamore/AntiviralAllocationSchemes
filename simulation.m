@@ -10,13 +10,11 @@ function [infected, eventTime, noAV, totalInfected, popSize]=simulation(var,init
 %kappa: Expected duration of antivirals
 %Rho: Reduction in susecptibility due to antivirals
 %Tau: Reduction in infectivity due to antivirals
-%Eta: Reduction in infectious period due to antivirals
 %pi_k: Distribution of household sizes
 %phi_k: Distribution of pre-allocation to household sizes (Must be the same length as pi_k)
 %N: Number of households
 %
-%Note that the reduction in infectious period is equivalent to a faster
-%recovery rate.
+
 
 
 	if isempty(varargin)

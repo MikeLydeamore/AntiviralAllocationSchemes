@@ -12,13 +12,10 @@ function [initialCondition, growth, Jacob]=init_conds_mh(var)
 %Edited 14/04/2014
 %
 
-%variables;
 
 %%% Disable this if Q matrix (and other things) is in the current folder
 %addpath('..');
 
-%prop_inf=10/(k*N);
-%prop_inf=3e-5;
 prop_inf=2*10^-3;
 
 JacIndex=0;
@@ -154,8 +151,7 @@ for k=1:length(var.pi_k)
     
     
     JacobTemp = JacRec+JacInInf+JacProg    + intoAV + outOfAV + falseTaking; 
-    %Jacob = [Jacob(1:length(stateList)/3,:); zeros(2*length(stateList)/3,length(stateList))];
-    %Jacob = [Jacob zeroMat zeroMat ; zeroMat zeroMat zeroMat ; zeroMat zeroMat zeroMat];
+
     
     %Pad out the matrix to be of the right dimension.
     [mj, nj]=size(Jacob);
@@ -173,10 +169,7 @@ statesLength=[1, cumsum(statesLength)];
 %External infection events:
 DExInf = sparse(zeros(length(megaStates)));
 
-%n=length(indexes);
-%matrix1=repmat((1-(megaStates(4,:)==1).*var.tau).*var.alpha.*megaStates(3,:),n,1);
-%DExInf(indexes,:)=repmat((var.pi_k)'.*(1-var.phi_k)',1,length(megaStates)).*matrix1;
-%DExInf(AVIndexes,:)=repmat((var.pi_k)'.*(1-var.phi_k)',1,length(megaStates)).*matrix1;
+
 for i=1:length(indexes)
     DExInf(indexes(i),:)=var.pi_k(i).*(1-var.phi_k(i)).*ones(1,length(megaStates)).*(1-(megaStates(4,:)==1).*var.tau).*var.alpha.*megaStates(3,:);
     DExInf(AVIndexes(i),:)=var.pi_k(i).*(var.phi_k(i)).*ones(1,length(megaStates)).*(1-(megaStates(4,:)==1).*var.tau).*var.alpha.*megaStates(3,:);
@@ -209,9 +202,8 @@ Jacob = Jacob+JacExInf;
 
 opts.disp=0;
 [v, d]=eigs(Jacob,1,'LR',opts);
-%[v, d]=eig(Jacob);
+
 eval=find(diag(d)>0);
-%fprintf('Growth rate: %.4f\n',d(eval,eval));
 growth=d(eval,eval);
 
 %We have I(0) = S + eps*EVect, and I(0)*megaStates(3,:)=prop_inf, so

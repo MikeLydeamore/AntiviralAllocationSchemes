@@ -96,11 +96,8 @@ for k=1:length(var.pi_k)
     reduceStates=[reduceStates, st];
 end
 
-%if tspan(2)-tspan(1)>1
-    %options=odeset('RelTol',1e-7,'AbsTol',1e-14,'OutputFcn',@(t,y,flag) destatus(t,y,flag,var,megaStates));
-%else
     options=odeset('OutputFcn',@(t,y,flag) destatus(t,y,flag,var,megaStates));
-%end
+
 
 %fix up the diagonals for the vaccination
 rowSum=sum(QVaccinationOnly,2);
@@ -111,14 +108,13 @@ end
 
 dPdt=@(t,y) selfConstDPMH(var,Q,Q2,QWithoutAV,QVaccinationOnly,megaStates,reduceStates,houseSizes,y,t);
 
-%[tout, yout]=ode45(dPdt,tspan,P, options);
 [tout, yout]=ode45(dPdt, tspan, P);
 
 It=var.N*megaStates(3,:)*yout';
-%plot(tout,log(yout));
+
 logInf=It;
 logInf(logInf>0)=log(logInf(logInf>0));
-%plot(tout,logInf,'r');
+
 
 %Total number of infected:
 totalRecovered=yout(end,:)*var.N*(k-sum(megaStates(1:3,:))');

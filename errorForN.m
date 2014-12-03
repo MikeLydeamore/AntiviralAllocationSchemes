@@ -18,10 +18,6 @@ for supermegacounter=1:length(NVector)
 	drawnow;
 	hold on;
     
-   % figure(2);
-   % plot(tout(1:20:end), abs(((avgInf(1:20:end))-(stateList(3,:)*yout(1:20:end,:)'*var.N)./divisions(supermegacounter))/((avgInf(1:20:end)))),cmap(supermegacounter));
-   % drawnow;
-   % hold on;
 end
 
 xlabel('Time');

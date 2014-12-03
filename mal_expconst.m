@@ -73,7 +73,6 @@ for k=1:length(var.pi_k)
     initialState=find(stateList(1,:)==(k-1)&stateList(2,:)==0&stateList(3,:)==1);
     p0(initialState)=1;
     
-%    first_term=expv(-var.kappa,(r*eye(size(Q2))-Q2)',p0*(var.zeta)*inv((var.zeta+r)*eye(size(Q1))-Q1));
 	first_term = var.zeta*p0*expm(-var.kappa*(r*eye(size(Q2))-Q2))*inv((var.zeta+r)*eye(size(Q1))-Q1);
     
     %Second term - Integral from 0-Inf of unrreduced system.

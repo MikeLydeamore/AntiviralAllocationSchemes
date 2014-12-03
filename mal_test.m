@@ -28,7 +28,6 @@ for k=1:length(var.pi_k)
     
     %Want state (k-1, 1, 0, 0)
     initialState=find(stateList(1,:)==(k-1)&stateList(2,:)==1&stateList(3,:)==0&stateList(4,:)==0);
-	% initialState=find(stateList(1,:)==(k-1)&stateList(2,:)==1&stateList(3,:)==0);
     
 	initialState2=find(stateList(1,:)==(k-1)&stateList(2,:)==1&stateList(3,:)==0&stateList(4,:)==4);
     s=s+(var.pi_k(k)*((1-var.phi_k(k))*x'*(initialState==transient)+var.phi_k(k)*x'*(initialState2==transient)));

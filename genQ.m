@@ -94,7 +94,7 @@ end
 %Assume we always start with 1 infected (otherwise there is no epidemic) so
 %initiate the arrival of antivirals.
 %Need to remove the initial state of only having exposed (k-1, 1, 0, 0)
-%switchblock = var.zeta*eye(noStates);
+
 switchblock = diag(ones(1,noStates)*var.zeta);
 initialState=find(stateList(1,:)==(k-1)&stateList(2,:)==1&stateList(3,:)==0);
 switchblock(initialState,initialState)=0;
@@ -108,11 +108,7 @@ end
 %                          Centre-Right Block                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 switchbackblock=diag(ones(1,noStates)*var.kappa);
-%switchbackblock=var.kappa*eye(noStates);
-%bannedStates=find((stateList(1,:)+stateList(2,:))==k&stateList(3,:)==0);
-%for i=1:length(bannedStates)
-%	switchbackblock(bannedStates,bannedStates)=0;
-%end
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                            Pre-Allocation bit                           %

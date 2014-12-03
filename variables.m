@@ -24,14 +24,11 @@ phi_k = zeros(1,length(h_k));
 
 gam=0;
 iter=15;
-%maxAV=50000;
 maxAV=71042;
 dosage=1;
 initialAV=2000;
 psi=0;
-%pi_k=1;
-%phi_k=0;
-%N=100000;
+
 pi_k = ((1:length(h_k)).*h_k)/(h_k*(1:length(h_k))');
 
 %phi_k=zeros(1,length(pi_k));
@@ -57,7 +54,3 @@ var = struct('beta',beta,'gamma',gamma,'sigma',sigma,'alpha',alpha,...
     'eta',eta,'rho',rho,'tau',tau,'psi',psi,'onDist',onDist,'offDist',offDist,'zeta',zeta,...
     'kappa',kappa,'h_k',h_k,'phi_k',phi_k,'pi_k',pi_k,'N',N,'iter',iter,'maxAV',maxAV,...
     'dosage',dosage,'k',k,'initialAV',initialAV);
-
-%var.phi_k=calcProportions(var);
-%var.phi_k=[0 0 1/3];
-%var.phi_k=[0 0 0 0 0 0 0 0];

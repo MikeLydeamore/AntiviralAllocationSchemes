@@ -45,14 +45,6 @@ end
 
 %Preallocation is taken care of in the initial condition now
 
-%Preallocate the antivirals
-%phi_k(k) is the proportion of households of size k that are preallocated AVs.
-%preAllocation=round(var.phi_k.*housePop);
-%Load in antivirals
-%cumSizes=[0 cumsum(housePop)];
-%for i=1:length(cumSizes)-1
-%    popStatus(cumSizes(i)+1:cumSizes(i)+preAllocation(i),5)=1;
-%end
 
 eventTime=zeros(1,maxIter);
 
@@ -183,7 +175,6 @@ while t<maxT && sum(popStatus(:,2)+popStatus(:,3))>0
 		 popStatus(household,5)=1;
 		 noAV=noAV+var.dosage*sum(popStatus(household,1:4));
 		 AVTime(household)=t;
-		 %fprintf('False start in household %d\n',household);
     end
     houseInfo(counter,:)=popStatus(500,:);
     counter=counter+1;
